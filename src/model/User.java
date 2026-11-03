@@ -1,3 +1,4 @@
+
 package model;
 
 import java.time.LocalDateTime;
@@ -9,15 +10,16 @@ public class User {
     private int userId;
     private String name;
     private String email;
-    private String role; // "STUDENT" or "ADMIN"
+    private String role;
     private String contact;
+    private String passwordHash;
     private LocalDateTime createdAt;
 
     // Default constructor
     public User() {
     }
 
-    // Constructor for creating new users (before ID is assigned by the database)
+    // Constructor for creating new users
     public User(String name, String email, String role, String contact) {
         this.name = name;
         this.email = email;
@@ -25,8 +27,19 @@ public class User {
         this.contact = contact;
     }
 
-    // Full constructor (for users fetched from the database)
-    public User(int userId, String name, String email, String role, String contact, LocalDateTime createdAt) {
+    // Constructor including password hash
+    public User(String name, String email, String role,
+                String contact, String passwordHash) {
+        this.name = name;
+        this.email = email;
+        this.role = role;
+        this.contact = contact;
+        this.passwordHash = passwordHash;
+    }
+
+    // Full constructor for users fetched from database
+    public User(int userId, String name, String email, String role,
+                String contact, LocalDateTime createdAt) {
         this.userId = userId;
         this.name = name;
         this.email = email;
@@ -74,6 +87,14 @@ public class User {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public LocalDateTime getCreatedAt() {
