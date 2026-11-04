@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>LABTRACK | Borrowing History</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="brand dashboard-brand">
+
+                <div class="brand-icon">L</div>
+
+                <div>
+                    <h2>LAB<span>TRACK</span></h2>
+                    <p>Equipment Management</p>
+                </div>
+
+            </div>
+
+            <p class="menu-heading">MAIN MENU</p>
+
+            <nav class="sidebar-nav">
+
+                <a href="student-dashboard.html" class="nav-link">
+                    <span>▦</span> Dashboard
+                </a>
+
+                <a href="equipment.html" class="nav-link">
+                    <span>▣</span> Equipment
+                </a>
+
+                <a href="borrow.html" class="nav-link">
+                    <span>↗</span> Borrow Equipment
+                </a>
+
+                <a href="return.html" class="nav-link">
+                    <span>↩</span> Return Equipment
+                </a>
+
+                <a href="history.html" class="nav-link active">
+                    <span>◷</span> Borrowing History
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <a href="index.html" class="nav-link logout-link">
+                    <span>↪</span> Logout
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="dashboard-main">
+
+            <!-- TOPBAR -->
+
+            <header class="dashboard-topbar">
+
+                <div>
+                    <h2>Borrowing History</h2>
+                    <p>Review your laboratory equipment transactions</p>
+                </div>
+
+                <div class="profile">
+
+                    <div class="profile-avatar" id="profileAvatar">
+                        S
+                    </div>
+
+                    <div>
+                        <strong id="studentName">Student</strong>
+                        <p id="studentRole">STUDENT</p>
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- PAGE BANNER -->
+
+            <section class="history-banner">
+
+                <span class="tagline">
+                    TRANSACTION RECORDS
+                </span>
+
+                <h1>Your Borrowing History</h1>
+
+                <p>
+                    Track your previous and current laboratory
+                    equipment borrowing records.
+                </p>
+
+            </section>
+
+
+            <!-- SUMMARY -->
+
+            <section class="history-summary">
+
+                <div class="history-stat-card">
+
+                    <span>Total Records</span>
+
+                    <h2 id="totalRecords">—</h2>
+
+                </div>
+
+
+                <div class="history-stat-card">
+
+                    <span>Returned Records</span>
+
+                    <h2 id="returnedRecords">—</h2>
+
+                </div>
+
+
+                <div class="history-stat-card">
+
+                    <span>Active Records</span>
+
+                    <h2 id="activeRecords">—</h2>
+
+                </div>
+
+            </section>
+
+
+            <!-- SEARCH AND REFRESH -->
+
+            <section class="history-controls">
+
+                <input
+                    type="search"
+                    id="historySearch"
+                    placeholder="Search by record ID or equipment ID..."
+                    aria-label="Search borrowing history"
+                >
+
+                <button
+                    type="button"
+                    id="historyRefresh"
+                    class="history-refresh-btn">
+
+                    ↻ Refresh
+
+                </button>
+
+            </section>
+
+
+            <!-- HISTORY TABLE -->
+
+            <section class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h2>Transaction Records</h2>
+
+                        <p>
+                            Your borrowing and return activity.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="table-container history-table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Record ID</th>
+                                <th>Equipment ID</th>
+                                <th>Borrow Date</th>
+                                <th>Due Date</th>
+                                <th>Return Date</th>
+                                <th>Status</th>
+                                <th>Fine Amount</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="historyTable">
+
+                            <tr>
+                                <td colspan="7">
+                                    Loading borrowing history...
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- API MESSAGE -->
+
+                <p
+                    id="historyMessage"
+                    class="history-message"
+                    aria-live="polite">
+                </p>
+
+            </section>
+
+
+            <!-- POLICY -->
+
+            <section class="history-policy">
+
+                <div class="history-policy-icon">◷</div>
+
+                <div>
+
+                    <h3>Borrowing Policy Reminder</h3>
+
+                    <p>
+                        The standard borrowing period is seven days.
+                        An overdue fine of ₹5 per day applies.
+                    </p>
+
+                    <p>
+                        The final fine and transaction status
+                        are determined by the Java backend.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- BORROWING HISTORY JAVASCRIPT -->
+
+    <script src="js/history.js"></script>
+
+</body>
+</html>

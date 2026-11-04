@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>LABTRACK | Return Equipment</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="brand dashboard-brand">
+
+                <div class="brand-icon">L</div>
+
+                <div>
+                    <h2>LAB<span>TRACK</span></h2>
+                    <p>Equipment Management</p>
+                </div>
+
+            </div>
+
+            <p class="menu-heading">MAIN MENU</p>
+
+            <nav class="sidebar-nav">
+
+                <a href="student-dashboard.html" class="nav-link">
+                    <span>▦</span> Dashboard
+                </a>
+
+                <a href="equipment.html" class="nav-link">
+                    <span>▣</span> Equipment
+                </a>
+
+                <a href="borrow.html" class="nav-link">
+                    <span>↗</span> Borrow Equipment
+                </a>
+
+                <a href="return.html" class="nav-link active">
+                    <span>↩</span> Return Equipment
+                </a>
+
+                <a href="history.html" class="nav-link">
+                    <span>◷</span> Borrowing History
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <a href="index.html" class="nav-link logout-link">
+                    <span>↪</span> Logout
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="dashboard-main">
+
+            <!-- TOPBAR -->
+
+            <header class="dashboard-topbar">
+
+                <div>
+                    <h2>Return Equipment</h2>
+                    <p>Manage your active laboratory borrowings</p>
+                </div>
+
+                <div class="profile">
+
+                    <div class="profile-avatar" id="profileAvatar">
+                        S
+                    </div>
+
+                    <div>
+                        <strong id="studentName">Student</strong>
+                        <p id="studentRole">STUDENT</p>
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- PAGE BANNER -->
+
+            <section class="return-banner">
+
+                <span class="tagline">
+                    EQUIPMENT RETURN
+                </span>
+
+                <h1>Return Laboratory Equipment</h1>
+
+                <p>
+                    Review your active borrowing records
+                    and return equipment to the laboratory.
+                </p>
+
+            </section>
+
+
+            <!-- SUMMARY -->
+
+            <section class="return-summary">
+
+                <div class="return-stat-card">
+
+                    <span>Active Borrowings</span>
+
+                    <h2 id="activeReturnsCount">—</h2>
+
+                </div>
+
+                <div class="return-stat-card">
+
+                    <span>Overdue Records</span>
+
+                    <h2 id="overdueCount">—</h2>
+
+                </div>
+
+            </section>
+
+
+            <!-- ACTIVE BORROWINGS -->
+
+            <section class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h2>My Active Borrowings</h2>
+
+                        <p>
+                            Equipment currently borrowed by you.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="return-refresh-btn"
+                        id="refreshButton">
+
+                        ↻ Refresh
+
+                    </button>
+
+                </div>
+
+
+                <!-- BORROWING TABLE -->
+
+                <div class="table-container return-table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Record ID</th>
+                                <th>Equipment ID</th>
+                                <th>Borrow Date</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="returnTable">
+
+                            <tr>
+                                <td colspan="6">
+                                    Loading borrowing records...
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- STATUS MESSAGE -->
+
+                <p
+                    id="returnMessage"
+                    class="return-message"
+                    aria-live="polite">
+                </p>
+
+            </section>
+
+
+            <!-- RETURN POLICY -->
+
+            <section class="return-policy-card">
+
+                <div class="return-policy-icon">↩</div>
+
+                <div>
+
+                    <h3>Equipment Return Policy</h3>
+
+                    <p>
+                        Please return equipment within the
+                        seven-day borrowing period.
+                    </p>
+
+                    <p>
+                        Overdue fine: <strong>₹5 per day</strong>.
+                        The final fine is calculated by the
+                        Java backend.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- RETURN EQUIPMENT JAVASCRIPT -->
+
+    <script src="js/return.js"></script>
+
+</body>
+</html>

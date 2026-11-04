@@ -1,0 +1,407 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LABTRACK | Manage Equipment</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand dashboard-brand">
+            <div class="brand-icon">L</div>
+            <div>
+                <h2>LAB<span>TRACK</span></h2>
+                <p>Equipment Management</p>
+            </div>
+        </div>
+
+        <p class="menu-heading">ADMIN MENU</p>
+
+        <nav class="sidebar-nav">
+
+            <a href="admin-dashboard.html" class="nav-link">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="admin-equipment.html" class="nav-link active">
+                <span>▣</span> Manage Equipment
+            </a>
+
+            <a href="admin-register.html" class="nav-link">
+                <span>＋</span> Register Admin
+            </a>
+
+            <a href="admin-history.html" class="nav-link">
+                <span>◷</span> Borrowing Records
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="index.html" class="nav-link logout-link">
+                <span>↪</span> Logout
+            </a>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+                <h2>Manage Equipment</h2>
+                <p>Manage laboratory inventory details</p>
+            </div>
+
+            <div class="profile">
+
+                <div class="profile-avatar" id="adminAvatar">
+                    A
+                </div>
+
+                <div>
+                    <strong id="adminName">Administrator</strong>
+                    <p id="adminRole">ADMIN</p>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE BANNER -->
+
+        <section class="equipment-banner">
+
+            <span class="tagline">INVENTORY MANAGEMENT</span>
+
+            <h1>Manage Laboratory Equipment</h1>
+
+            <p>
+                Add equipment and update existing inventory details.
+            </p>
+
+        </section>
+
+
+        <!-- ADD EQUIPMENT -->
+
+        <section class="admin-equipment-card">
+
+            <h2>Add New Equipment</h2>
+
+            <p class="admin-form-subtitle">
+                Enter the equipment details for the laboratory inventory.
+            </p>
+
+            <form id="addEquipmentForm">
+
+                <div class="admin-form-grid">
+
+                    <div class="borrow-field">
+
+                        <label for="equipmentName">
+                            Equipment Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="equipmentName"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="borrow-field">
+
+                        <label for="equipmentCategory">
+                            Category
+                        </label>
+
+                        <input
+                            type="text"
+                            id="equipmentCategory"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="borrow-field">
+
+                        <label for="totalQuantity">
+                            Total Quantity
+                        </label>
+
+                        <input
+                            type="number"
+                            id="totalQuantity"
+                            min="1"
+                            step="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="borrow-field">
+
+                        <label for="conditionStatus">
+                            Condition Status
+                        </label>
+
+                        <input
+                            type="text"
+                            id="conditionStatus"
+                            placeholder="e.g. GOOD or NEW"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <p class="admin-form-note">
+                    Available quantity will initially equal total quantity,
+                    as handled by the Java backend.
+                </p>
+
+
+                <button
+                    type="submit"
+                    class="borrow-submit"
+                    id="addEquipmentButton"
+                    disabled
+                >
+                    Add Equipment
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- UPDATE EQUIPMENT -->
+
+        <section class="admin-equipment-card">
+
+            <h2>Update Existing Equipment</h2>
+
+            <p class="admin-form-subtitle">
+                Enter an existing equipment ID to load its current details,
+                then make the required changes.
+            </p>
+
+            <form id="updateEquipmentForm">
+
+                <div class="admin-form-grid">
+
+                    <div class="borrow-field">
+
+                        <label for="updateEquipmentId">
+                            Equipment ID
+                        </label>
+
+                        <input
+                            type="number"
+                            id="updateEquipmentId"
+                            min="1"
+                            step="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="borrow-field">
+
+                        <label for="updateEquipmentName">
+                            Equipment Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="updateEquipmentName"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="borrow-field">
+
+                        <label for="updateCategory">
+                            Category
+                        </label>
+
+                        <input
+                            type="text"
+                            id="updateCategory"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="borrow-field">
+
+                        <label for="updateTotalQuantity">
+                            Total Quantity
+                        </label>
+
+                        <input
+                            type="number"
+                            id="updateTotalQuantity"
+                            min="1"
+                            step="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="borrow-field">
+
+                        <label for="updateAvailableQuantity">
+                            Available Quantity
+                        </label>
+
+                        <input
+                            type="number"
+                            id="updateAvailableQuantity"
+                            min="0"
+                            step="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="borrow-field">
+
+                        <label for="updateCondition">
+                            Condition Status
+                        </label>
+
+                        <input
+                            type="text"
+                            id="updateCondition"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <p class="admin-form-note">
+                    Enter an existing Equipment ID to load its current
+                    database values. Review the available quantity before
+                    submitting an update.
+                </p>
+
+
+                <button
+                    type="submit"
+                    class="borrow-submit"
+                    id="updateEquipmentButton"
+                    disabled
+                >
+                    Update Equipment
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- INVENTORY TABLE -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Equipment Inventory</h2>
+
+                    <p>
+                        Existing equipment records from MySQL.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Equipment ID</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Total Quantity</th>
+                            <th>Available Quantity</th>
+                            <th>Condition</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="equipmentTable">
+
+                        <tr>
+                            <td colspan="6">
+                                Loading equipment inventory...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <p
+                id="equipmentAdminMessage"
+                class="history-message"
+                aria-live="polite"
+            >
+                Loading inventory information...
+            </p>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ADMIN EQUIPMENT JAVASCRIPT -->
+
+<script src="js/admin-equipment.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LABTRACK | Administrator Registration</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand dashboard-brand">
+
+            <div class="brand-icon">L</div>
+
+            <div>
+                <h2>LAB<span>TRACK</span></h2>
+                <p>Equipment Management</p>
+            </div>
+
+        </div>
+
+        <p class="menu-heading">ADMIN MENU</p>
+
+        <nav class="sidebar-nav">
+
+            <a href="admin-dashboard.html" class="nav-link">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="admin-equipment.html" class="nav-link">
+                <span>▣</span> Manage Equipment
+            </a>
+
+            <a href="admin-register.html" class="nav-link active">
+                <span>＋</span> Register Admin
+            </a>
+
+            <a href="admin-history.html" class="nav-link">
+                <span>◷</span> Borrowing Records
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="index.html" class="nav-link logout-link">
+                <span>↪</span> Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+                <h2>Administrator Registration</h2>
+                <p>Register an additional administrator account</p>
+            </div>
+
+            <div class="profile">
+
+                <div class="profile-avatar" id="adminAvatar">
+                    A
+                </div>
+
+                <div>
+                    <strong id="adminNameDisplay">
+                        Administrator
+                    </strong>
+
+                    <p id="adminRoleDisplay">ADMIN</p>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- BANNER -->
+
+        <section class="equipment-banner">
+
+            <span class="tagline">
+                ADMIN ACCOUNT MANAGEMENT
+            </span>
+
+            <h1>Register New Administrator</h1>
+
+            <p>
+                Create an additional administrator account
+                for the laboratory management system.
+            </p>
+
+        </section>
+
+
+        <!-- REGISTRATION FORM AND INFORMATION -->
+
+        <section class="admin-register-layout">
+
+
+            <!-- REGISTRATION FORM -->
+
+            <div class="admin-register-card">
+
+                <h2>Administrator Details</h2>
+
+                <p class="admin-form-subtitle">
+                    Enter the required account information.
+                </p>
+
+
+                <form id="adminRegisterForm">
+
+                    <!-- FULL NAME -->
+
+                    <div class="borrow-field">
+
+                        <label for="adminName">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="adminName"
+                            placeholder="Enter full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="borrow-field">
+
+                        <label for="adminEmail">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="adminEmail"
+                            placeholder="Enter email address"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- CONTACT -->
+
+                    <div class="borrow-field">
+
+                        <label for="adminContact">
+                            Contact Number (Optional)
+                        </label>
+
+                        <input
+                            type="text"
+                            id="adminContact"
+                            placeholder="Enter contact number"
+                        >
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="borrow-field">
+
+                        <label for="adminPassword">
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="adminPassword"
+                            placeholder="Minimum 8 characters"
+                            minlength="8"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="borrow-field">
+
+                        <label for="confirmAdminPassword">
+                            Confirm Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirmAdminPassword"
+                            placeholder="Re-enter password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        type="submit"
+                        id="adminRegisterButton"
+                        class="borrow-submit"
+                    >
+                        Register Administrator
+                    </button>
+
+
+                    <!-- RESPONSE MESSAGE -->
+
+                    <p
+                        id="adminRegisterMessage"
+                        class="admin-register-message"
+                        aria-live="polite">
+                    </p>
+
+                </form>
+
+            </div>
+
+
+            <!-- ADMIN INFORMATION CARD -->
+
+            <div class="admin-register-info">
+
+                <div class="return-policy-icon">♙</div>
+
+                <h2>Administrator Access</h2>
+
+                <p>
+                    Administrator accounts have access to
+                    the management operations provided by
+                    the Java backend.
+                </p>
+
+
+                <div class="admin-register-rule">
+
+                    <strong>01. Authorization</strong>
+
+                    <p>
+                        Only an existing authenticated administrator
+                        can register another administrator.
+                    </p>
+
+                </div>
+
+
+                <div class="admin-register-rule">
+
+                    <strong>02. Password Security</strong>
+
+                    <p>
+                        Passwords are hashed by the Java backend
+                        before database storage.
+                    </p>
+
+                </div>
+
+
+                <div class="admin-register-rule">
+
+                    <strong>03. Email Validation</strong>
+
+                    <p>
+                        An already registered email cannot
+                        be registered again.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ADMIN REGISTRATION JAVASCRIPT -->
+
+<script src="js/admin-register.js"></script>
+
+</body>
+</html>
