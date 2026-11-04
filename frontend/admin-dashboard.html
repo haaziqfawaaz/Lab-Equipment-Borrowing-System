@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LABTRACK | Admin Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand dashboard-brand">
+
+            <div class="brand-icon">L</div>
+
+            <div>
+                <h2>LAB<span>TRACK</span></h2>
+                <p>Equipment Management</p>
+            </div>
+
+        </div>
+
+        <p class="menu-heading">ADMIN MENU</p>
+
+        <nav class="sidebar-nav">
+
+            <a href="admin-dashboard.html" class="nav-link active">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="admin-equipment.html" class="nav-link">
+                <span>▣</span> Manage Equipment
+            </a>
+
+            <a href="admin-register.html" class="nav-link">
+                <span>＋</span> Register Admin
+            </a>
+
+            <a href="admin-history.html" class="nav-link">
+                <span>◷</span> Borrowing Records
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="index.html" class="nav-link logout-link">
+                <span>↪</span> Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+                <h2>Administrator Dashboard</h2>
+                <p>Laboratory equipment management portal</p>
+            </div>
+
+            <div class="profile">
+
+                <div class="profile-avatar" id="adminAvatar">
+                    A
+                </div>
+
+                <div>
+                    <strong id="adminName">Administrator</strong>
+                    <p id="adminRole">ADMIN</p>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- WELCOME BANNER -->
+
+        <section class="history-banner">
+
+            <span class="tagline">
+                ADMINISTRATION PORTAL
+            </span>
+
+            <h1 id="adminWelcome">
+                Manage Your Laboratories.
+            </h1>
+
+            <p>
+                Manage laboratory equipment, monitor inventory
+                and access borrowing records.
+            </p>
+
+        </section>
+
+
+        <!-- INVENTORY SUMMARY -->
+
+        <section class="history-summary">
+
+            <div class="history-stat-card">
+
+                <span>Total Equipment Types</span>
+
+                <h2 id="totalEquipment">—</h2>
+
+            </div>
+
+            <div class="history-stat-card">
+
+                <span>Total Quantity</span>
+
+                <h2 id="totalQuantity">—</h2>
+
+            </div>
+
+            <div class="history-stat-card">
+
+                <span>Available Quantity</span>
+
+                <h2 id="availableQuantity">—</h2>
+
+            </div>
+
+        </section>
+
+
+        <!-- API STATUS -->
+
+        <p
+            id="adminMessage"
+            class="history-message"
+            aria-live="polite">
+            Loading inventory information...
+        </p>
+
+
+        <!-- MANAGEMENT OPTIONS -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Management Operations</h2>
+                    <p>Available administrator operations</p>
+                </div>
+
+            </div>
+
+            <div class="history-summary">
+
+                <div class="history-stat-card">
+
+                    <h3>Equipment Management</h3>
+
+                    <p>
+                        View, add and update laboratory equipment.
+                    </p>
+
+                    <br>
+
+                    <a href="admin-equipment.html">
+                        Manage Equipment →
+                    </a>
+
+                </div>
+
+
+                <div class="history-stat-card">
+
+                    <h3>Administrator Registration</h3>
+
+                    <p>
+                        Register additional administrator accounts.
+                    </p>
+
+                    <br>
+
+                    <a href="admin-register.html">
+                        Register Admin →
+                    </a>
+
+                </div>
+
+
+                <div class="history-stat-card">
+
+                    <h3>Borrowing Records</h3>
+
+                    <p>
+                        Access the borrowing transaction history.
+                    </p>
+
+                    <br>
+
+                    <a href="admin-history.html">
+                        View Records →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- EQUIPMENT INVENTORY -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Equipment Inventory</h2>
+
+                    <p>
+                        Actual inventory data from the MySQL database.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Equipment ID</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Total Quantity</th>
+                            <th>Available Quantity</th>
+                            <th>Condition</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="adminEquipmentTable">
+
+                        <tr>
+                            <td colspan="6">
+                                Loading equipment inventory...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ADMIN DASHBOARD JAVASCRIPT -->
+
+<script src="js/admin-dashboard.js"></script>
+
+</body>
+</html>

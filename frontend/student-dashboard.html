@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LABTRACK | Student Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="brand dashboard-brand">
+
+                <div class="brand-icon">L</div>
+
+                <div>
+                    <h2>LAB<span>TRACK</span></h2>
+                    <p>Equipment Management</p>
+                </div>
+
+            </div>
+
+            <p class="menu-heading">MAIN MENU</p>
+
+            <nav class="sidebar-nav">
+
+                <a href="student-dashboard.html" class="nav-link active">
+                    <span>▦</span> Dashboard
+                </a>
+
+                <a href="equipment.html" class="nav-link">
+                    <span>▣</span> Equipment
+                </a>
+
+                <a href="borrow.html" class="nav-link">
+                    <span>↗</span> Borrow Equipment
+                </a>
+
+                <a href="return.html" class="nav-link">
+                    <span>↩</span> Return Equipment
+                </a>
+
+                <a href="history.html" class="nav-link">
+                    <span>◷</span> Borrowing History
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <a href="index.html" class="nav-link logout-link">
+                    <span>↪</span> Logout
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="dashboard-main">
+
+            <!-- TOPBAR -->
+
+            <header class="dashboard-topbar">
+
+                <div>
+                    <h2>Student Dashboard</h2>
+                    <p>Laboratory Equipment Management Portal</p>
+                </div>
+
+                <div class="profile">
+
+                    <div class="profile-avatar">S</div>
+
+                    <div>
+                        <strong id="studentName">Student</strong>
+                        <p id="studentRole">STUDENT</p>
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- WELCOME SECTION -->
+
+            <section class="dashboard-welcome">
+
+                <div>
+
+                    <span class="tagline">
+                        STUDENT PORTAL
+                    </span>
+
+                    <h1 id="welcomeHeading">Welcome back!</h1>
+
+                    <p>
+                        Manage your laboratory equipment,
+                        borrowing and returns in one place.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- DASHBOARD STATISTICS -->
+
+            <section class="stats-grid">
+
+                <div class="stat-card">
+
+                    <p>Available Equipment</p>
+
+                    <h2 id="availableCount">—</h2>
+
+                    <span>Available units across all categories</span>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <p>Active Borrowings</p>
+
+                    <h2 id="activeCount">—</h2>
+
+                    <span>Currently borrowed</span>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <p>Borrowing History</p>
+
+                    <h2 id="historyCount">—</h2>
+
+                    <span>Total transactions</span>
+
+                </div>
+
+            </section>
+
+
+            <!-- DASHBOARD API MESSAGE -->
+
+            <p
+                id="dashboardMessage"
+                class="history-message"
+                aria-live="polite"
+            >
+                Loading dashboard information...
+            </p>
+
+
+            <!-- LABORATORY CATEGORIES -->
+
+            <section class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h2>Laboratory Categories</h2>
+
+                        <p>
+                            Browse your college laboratory equipment.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <!-- Categories will be loaded from the backend -->
+
+                <div class="category-grid" id="categoryGrid">
+
+                    <p>Loading laboratory categories...</p>
+
+                </div>
+
+            </section>
+
+
+            <!-- RECENT BORROWINGS -->
+
+            <section class="dashboard-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <h2>Recent Borrowings</h2>
+
+                        <p>
+                            Your recent equipment transactions.
+                        </p>
+                    </div>
+
+                    <a href="history.html">View History →</a>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Record ID</th>
+                                <th>Equipment ID</th>
+                                <th>Borrow Date</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="borrowingTable">
+
+                            <tr>
+                                <td colspan="5">
+                                    Loading borrowing records...
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- STUDENT DASHBOARD JAVASCRIPT -->
+
+    <script src="js/student-dashboard.js"></script>
+
+</body>
+
+</html>

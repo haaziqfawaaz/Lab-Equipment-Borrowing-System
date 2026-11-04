@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LABTRACK | Borrowing Records</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand dashboard-brand">
+
+            <div class="brand-icon">L</div>
+
+            <div>
+                <h2>LAB<span>TRACK</span></h2>
+                <p>Equipment Management</p>
+            </div>
+
+        </div>
+
+        <p class="menu-heading">ADMIN MENU</p>
+
+        <nav class="sidebar-nav">
+
+            <a href="admin-dashboard.html" class="nav-link">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="admin-equipment.html" class="nav-link">
+                <span>▣</span> Manage Equipment
+            </a>
+
+            <a href="admin-register.html" class="nav-link">
+                <span>＋</span> Register Admin
+            </a>
+
+            <a href="admin-history.html" class="nav-link active">
+                <span>◷</span> Borrowing Records
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="index.html" class="nav-link logout-link">
+                <span>↪</span> Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+                <h2>Borrowing Records</h2>
+                <p>View laboratory equipment borrowing history</p>
+            </div>
+
+            <div class="profile">
+
+                <div class="profile-avatar" id="adminAvatar">
+                    A
+                </div>
+
+                <div>
+                    <strong id="adminName">Administrator</strong>
+                    <p id="adminRole">ADMIN</p>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE BANNER -->
+
+        <section class="equipment-banner">
+
+            <span class="tagline">
+                BORROWING MANAGEMENT
+            </span>
+
+            <h1>Laboratory Borrowing Records</h1>
+
+            <p>
+                View borrowing and return records maintained
+                by the Java backend.
+            </p>
+
+        </section>
+
+
+        <!-- BORROWING RECORDS TABLE -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>All Borrowing Records</h2>
+
+                    <p>
+                        Records retrieved from the MySQL database.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="history-refresh-btn"
+                    id="adminHistoryRefresh"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Record ID</th>
+                            <th>User ID</th>
+                            <th>Equipment ID</th>
+                            <th>Borrow Date</th>
+                            <th>Due Date</th>
+                            <th>Return Date</th>
+                            <th>Status</th>
+                            <th>Fine Amount</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="adminBorrowingTable">
+
+                        <tr>
+                            <td colspan="8">
+                                Loading borrowing records...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- API STATUS MESSAGE -->
+
+            <p
+                id="adminHistoryMessage"
+                class="history-message"
+                aria-live="polite">
+                Loading borrowing records...
+            </p>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ADMIN BORROWING HISTORY JAVASCRIPT -->
+
+<script src="js/admin-history.js"></script>
+
+</body>
+</html>

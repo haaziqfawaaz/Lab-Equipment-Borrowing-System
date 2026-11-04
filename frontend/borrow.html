@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>LABTRACK | Borrow Equipment</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="brand dashboard-brand">
+
+                <div class="brand-icon">L</div>
+
+                <div>
+                    <h2>LAB<span>TRACK</span></h2>
+                    <p>Equipment Management</p>
+                </div>
+
+            </div>
+
+            <p class="menu-heading">MAIN MENU</p>
+
+            <nav class="sidebar-nav">
+
+                <a href="student-dashboard.html" class="nav-link">
+                    <span>▦</span> Dashboard
+                </a>
+
+                <a href="equipment.html" class="nav-link">
+                    <span>▣</span> Equipment
+                </a>
+
+                <a href="borrow.html" class="nav-link active">
+                    <span>↗</span> Borrow Equipment
+                </a>
+
+                <a href="return.html" class="nav-link">
+                    <span>↩</span> Return Equipment
+                </a>
+
+                <a href="history.html" class="nav-link">
+                    <span>◷</span> Borrowing History
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <a href="index.html" class="nav-link logout-link">
+                    <span>↪</span> Logout
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="dashboard-main">
+
+            <!-- TOPBAR -->
+
+            <header class="dashboard-topbar">
+
+                <div>
+                    <h2>Borrow Equipment</h2>
+                    <p>Request laboratory equipment</p>
+                </div>
+
+                <div class="profile">
+
+                    <div class="profile-avatar" id="profileAvatar">
+                        S
+                    </div>
+
+                    <div>
+                        <strong id="studentName">Student</strong>
+                        <p id="studentRole">STUDENT</p>
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- PAGE BANNER -->
+
+            <section class="borrow-banner">
+
+                <span class="tagline">
+                    EQUIPMENT BORROWING
+                </span>
+
+                <h1>Borrow Laboratory Equipment</h1>
+
+                <p>
+                    Select available equipment and submit
+                    your borrowing request.
+                </p>
+
+            </section>
+
+
+            <!-- BORROW FORM AND POLICY -->
+
+            <section class="borrow-layout">
+
+
+                <!-- BORROW FORM -->
+
+                <div class="borrow-form-card">
+
+                    <h2>Borrow Request</h2>
+
+                    <p class="borrow-subtitle">
+                        Select an available item from the
+                        laboratory inventory.
+                    </p>
+
+
+                    <form id="borrowForm">
+
+                        <!-- EQUIPMENT SELECTION -->
+
+                        <div class="borrow-field">
+
+                            <label for="equipmentSelect">
+                                Select Equipment
+                            </label>
+
+                            <select id="equipmentSelect" required>
+
+                                <option value="">
+                                    Loading equipment...
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- EQUIPMENT ID -->
+
+                        <div class="borrow-field">
+
+                            <label for="equipmentId">
+                                Equipment ID
+                            </label>
+
+                            <input
+                                type="text"
+                                id="equipmentId"
+                                placeholder="Automatically displayed"
+                                readonly
+                            >
+
+                        </div>
+
+
+                        <!-- CATEGORY -->
+
+                        <div class="borrow-field">
+
+                            <label for="category">
+                                Laboratory Category
+                            </label>
+
+                            <input
+                                type="text"
+                                id="category"
+                                placeholder="Automatically displayed"
+                                readonly
+                            >
+
+                        </div>
+
+
+                        <!-- EQUIPMENT DETAILS -->
+
+                        <div class="borrow-detail-grid">
+
+                            <div class="borrow-detail">
+
+                                <span>Available Quantity</span>
+
+                                <strong id="availableQuantity">
+                                    —
+                                </strong>
+
+                            </div>
+
+
+                            <div class="borrow-detail">
+
+                                <span>Borrowing Period</span>
+
+                                <strong>7 Days</strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- BACKEND-GENERATED DUE DATE -->
+
+                        <div class="borrow-field">
+
+                            <label for="dueDate">
+                                Confirmed Due Date
+                            </label>
+
+                            <input
+                                type="text"
+                                id="dueDate"
+                                placeholder="Provided after successful borrowing"
+                                readonly
+                            >
+
+                        </div>
+
+
+                        <!-- SUBMIT BUTTON -->
+
+                        <button
+                            type="submit"
+                            id="borrowButton"
+                            class="borrow-submit"
+                            disabled
+                        >
+                            Submit Borrow Request
+                        </button>
+
+
+                        <!-- STATUS MESSAGE -->
+
+                        <p
+                            id="borrowMessage"
+                            class="borrow-message"
+                            aria-live="polite"
+                        ></p>
+
+                    </form>
+
+                </div>
+
+
+                <!-- BORROWING POLICY -->
+
+                <div class="borrow-info-card">
+
+                    <h2>Borrowing Guidelines</h2>
+
+                    <p class="borrow-subtitle">
+                        Please follow the laboratory
+                        borrowing rules.
+                    </p>
+
+
+                    <ul class="borrow-info-list">
+
+                        <li>
+                            <strong>01. Borrowing Period</strong>
+                            <br>
+                            Standard borrowing period is
+                            seven days.
+                        </li>
+
+                        <li>
+                            <strong>02. Equipment Availability</strong>
+                            <br>
+                            Requests are subject to available
+                            laboratory stock.
+                        </li>
+
+                        <li>
+                            <strong>03. Return Equipment</strong>
+                            <br>
+                            Return borrowed equipment within
+                            the specified due date.
+                        </li>
+
+                        <li>
+                            <strong>04. Overdue Fine</strong>
+                            <br>
+                            Fine of ₹5 per overdue day.
+                        </li>
+
+                    </ul>
+
+
+                    <div class="borrow-notice">
+
+                        <strong>Important Notice</strong>
+
+                        <p>
+                            Equipment borrowing is available
+                            only to authenticated students.
+                            Follow the laboratory return policy.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- BORROW EQUIPMENT JAVASCRIPT -->
+
+    <script src="js/borrow.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>LABTRACK | Equipment</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="brand dashboard-brand">
+
+                <div class="brand-icon">L</div>
+
+                <div>
+                    <h2>LAB<span>TRACK</span></h2>
+                    <p>Equipment Management</p>
+                </div>
+
+            </div>
+
+            <p class="menu-heading">MAIN MENU</p>
+
+            <nav class="sidebar-nav">
+
+                <a href="student-dashboard.html" class="nav-link">
+                    <span>▦</span> Dashboard
+                </a>
+
+                <a href="equipment.html" class="nav-link active">
+                    <span>▣</span> Equipment
+                </a>
+
+                <a href="borrow.html" class="nav-link">
+                    <span>↗</span> Borrow Equipment
+                </a>
+
+                <a href="return.html" class="nav-link">
+                    <span>↩</span> Return Equipment
+                </a>
+
+                <a href="history.html" class="nav-link">
+                    <span>◷</span> Borrowing History
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <a href="index.html" class="nav-link logout-link">
+                    <span>↪</span> Logout
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="dashboard-main">
+
+            <!-- TOPBAR -->
+
+            <header class="dashboard-topbar">
+
+                <div>
+                    <h2>Laboratory Equipment</h2>
+                    <p>Browse your college laboratory inventory</p>
+                </div>
+
+                <div class="profile">
+
+                    <div class="profile-avatar" id="profileAvatar">
+                        S
+                    </div>
+
+                    <div>
+                        <strong id="studentName">Student</strong>
+                        <p id="studentRole">STUDENT</p>
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- PAGE INTRODUCTION -->
+
+            <section class="equipment-banner">
+
+                <span class="tagline">
+                    EQUIPMENT INVENTORY
+                </span>
+
+                <h1>Explore Laboratory Equipment</h1>
+
+                <p>
+                    Browse laboratory equipment and check
+                    its availability, quantity and condition.
+                </p>
+
+            </section>
+
+
+            <!-- SEARCH AND FILTER -->
+
+            <section class="equipment-controls">
+
+                <div class="equipment-search">
+
+                    <input
+                        type="search"
+                        id="searchEquipment"
+                        placeholder="Search equipment by name..."
+                        aria-label="Search equipment by name"
+                    >
+
+                </div>
+
+                <div
+                    class="equipment-filters"
+                    id="equipmentFilters"
+                >
+
+                    <button
+                        type="button"
+                        class="filter-btn active"
+                        data-category="ALL"
+                    >
+                        All
+                    </button>
+
+                    <span>Loading categories...</span>
+
+                </div>
+
+            </section>
+
+
+            <!-- INVENTORY SUMMARY -->
+
+            <section class="inventory-summary">
+
+                <div>
+                    <span>Total Equipment Types</span>
+                    <h2 id="totalEquipment">—</h2>
+                </div>
+
+                <div>
+                    <span>Available Equipment Types</span>
+                    <h2 id="availableEquipment">—</h2>
+                </div>
+
+            </section>
+
+
+            <!-- EQUIPMENT LIST -->
+
+            <section class="equipment-section">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h2 id="equipmentHeading">
+                            All Equipment
+                        </h2>
+
+                        <p>
+                            Equipment details from the laboratory inventory.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EQUIPMENT CARDS FROM MYSQL -->
+
+                <div
+                    id="equipmentGrid"
+                    class="equipment-grid"
+                >
+
+                    <div class="equipment-message">
+                        Loading equipment...
+                    </div>
+
+                </div>
+
+
+                <!-- API STATUS AND SEARCH MESSAGES -->
+
+                <p
+                    id="equipmentMessage"
+                    class="equipment-message"
+                    aria-live="polite"
+                ></p>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- EQUIPMENT JAVASCRIPT -->
+
+    <script src="js/equipment.js"></script>
+
+</body>
+
+</html>

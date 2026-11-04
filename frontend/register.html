@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>LABTRACK | Student Registration</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <main class="register-container">
+
+        <!-- LEFT BRANDING SECTION -->
+
+        <section class="brand-section">
+
+            <div class="brand">
+
+                <div class="brand-icon">L</div>
+
+                <div>
+                    <h2>LAB<span>TRACK</span></h2>
+                    <p>Equipment Management System</p>
+                </div>
+
+            </div>
+
+
+            <div class="brand-content">
+
+                <span class="tagline">
+                    JOIN LABTRACK
+                </span>
+
+                <h1>
+                    Your lab.
+                    <span>Your control.</span>
+                </h1>
+
+                <p>
+                    Create your student account and manage
+                    your laboratory equipment borrowing
+                    activities with ease.
+                </p>
+
+            </div>
+
+
+            <div class="brand-footer">
+                © 2026 LabTrack. College Laboratory Portal.
+            </div>
+
+        </section>
+
+
+        <!-- REGISTRATION FORM SECTION -->
+
+        <section class="register-section">
+
+            <div class="register-card">
+
+                <div class="welcome-text">
+
+                    <h2>Create account</h2>
+
+                    <p>
+                        Register to access your laboratory portal.
+                    </p>
+
+                </div>
+
+
+                <form id="registerForm">
+
+                    <!-- FULL NAME -->
+
+                    <div class="form-group">
+
+                        <label for="fullName">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            College Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your college email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- CONTACT NUMBER -->
+
+                    <div class="form-group">
+
+                        <label for="contact">
+                            Contact Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="contact"
+                            placeholder="Enter your contact number"
+                            autocomplete="tel"
+                            pattern="[0-9]{10}"
+                            maxlength="10"
+                            inputmode="numeric"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="password-box">
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Create a password"
+                                autocomplete="new-password"
+                                minlength="8"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="toggle-password"
+                                data-target="password">
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="confirmPassword">
+                            Confirm Password
+                        </label>
+
+                        <div class="password-box">
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                placeholder="Re-enter your password"
+                                autocomplete="new-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="toggle-password"
+                                data-target="confirmPassword">
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- REGISTER BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="login-button register-button">
+
+                        Create Account
+
+                    </button>
+
+
+                    <p id="registerMessage" class="message"></p>
+
+                </form>
+
+
+                <!-- LOGIN LINK -->
+
+                <div class="register-login">
+
+                    Already have an account?
+
+                    <a href="index.html">
+                        Sign In
+                    </a>
+
+                </div>
+
+
+                <div class="login-footer">
+
+                    Secure access for registered students.
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/register.js"></script>
+
+</body>
+</html>
