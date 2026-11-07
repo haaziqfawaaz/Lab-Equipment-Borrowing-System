@@ -1,54 +1,45 @@
-
 package model;
 
 import java.time.LocalDateTime;
 
 /**
  * Model class representing a User (Student or Admin).
+ * Inherits common personal details from the abstract Person class.
  */
-public class User {
+public class User extends Person {
     private int userId;
-    private String name;
-    private String email;
     private String role;
-    private String contact;
     private String passwordHash;
     private LocalDateTime createdAt;
 
-    // Default constructor
+    // Default constructor required by Gson and DAO mapping.
     public User() {
+        super();
     }
 
-    // Constructor for creating new users
+    // Constructor for creating new users.
     public User(String name, String email, String role, String contact) {
-        this.name = name;
-        this.email = email;
+        super(name, email, contact);
         this.role = role;
-        this.contact = contact;
     }
 
-    // Constructor including password hash
+    // Constructor including password hash.
     public User(String name, String email, String role,
                 String contact, String passwordHash) {
-        this.name = name;
-        this.email = email;
+        super(name, email, contact);
         this.role = role;
-        this.contact = contact;
         this.passwordHash = passwordHash;
     }
 
-    // Full constructor for users fetched from database
+    // Full constructor for users fetched from database.
     public User(int userId, String name, String email, String role,
                 String contact, LocalDateTime createdAt) {
+        super(name, email, contact);
         this.userId = userId;
-        this.name = name;
-        this.email = email;
         this.role = role;
-        this.contact = contact;
         this.createdAt = createdAt;
     }
 
-    // Getters and Setters
     public int getUserId() {
         return userId;
     }
@@ -57,36 +48,12 @@ public class User {
         this.userId = userId;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
     }
 
     public String getPasswordHash() {
@@ -109,10 +76,10 @@ public class User {
     public String toString() {
         return "User{" +
                 "userId=" + userId +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
+                ", name='" + getName() + '\'' +
+                ", email='" + getEmail() + '\'' +
                 ", role='" + role + '\'' +
-                ", contact='" + contact + '\'' +
+                ", contact='" + getContact() + '\'' +
                 ", createdAt=" + createdAt +
                 '}';
     }

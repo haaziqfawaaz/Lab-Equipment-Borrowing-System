@@ -4,6 +4,10 @@ package service;
 import dao.BorrowRecordDAO;
 import dao.EquipmentDAO;
 import dao.UserDAO;
+import exception.DuplicateReturnException;
+import exception.EquipmentUnavailableException;
+import exception.InvalidBorrowRequestException;
+import exception.UnauthorizedBorrowingException;
 import database.DatabaseConnection;
 import model.BorrowRecord;
 import model.Equipment;
@@ -21,7 +25,7 @@ import java.util.List;
  * Service class for Equipment Borrowing and Returning.
  * Handles transactions, authorization and fine calculations.
  */
-public class BorrowService {
+public class BorrowService implements BorrowOperations {
 
     public static final int STANDARD_BORROW_DAYS = 7;
 
@@ -50,7 +54,8 @@ public class BorrowService {
      * Borrows equipment for a student.
      */
     public BorrowRecord borrowEquipment(int userId, int equipmentId)
-            throws SQLException {
+            throws SQLException, InvalidBorrowRequestException, EquipmentUnavailableException,
+                   UnauthorizedBorrowingException, DuplicateReturnException {
         return borrowEquipment(userId, equipmentId, LocalDate.now());
     }
 
@@ -60,7 +65,8 @@ public class BorrowService {
      */
     public BorrowRecord borrowEquipment(int userId, int equipmentId,
                                         LocalDate borrowDate)
-            throws SQLException {
+            throws SQLException, InvalidBorrowRequestException, EquipmentUnavailableException,
+                   UnauthorizedBorrowingException, DuplicateReturnException {
 
         if (borrowDate == null) {
             borrowDate = LocalDate.now();
@@ -69,24 +75,24 @@ public class BorrowService {
         User user = userDAO.findById(userId);
 
         if (user == null) {
-            throw new IllegalArgumentException(
+            throw new InvalidBorrowRequestException(
                     "User with ID " + userId + " does not exist.");
         }
 
         if (!"STUDENT".equalsIgnoreCase(user.getRole())) {
-            throw new IllegalArgumentException(
+            throw new InvalidBorrowRequestException(
                     "Only students can borrow equipment.");
         }
 
         Equipment equipment = equipmentDAO.findById(equipmentId);
 
         if (equipment == null) {
-            throw new IllegalArgumentException(
+            throw new InvalidBorrowRequestException(
                     "Equipment with ID " + equipmentId + " does not exist.");
         }
 
         if (equipment.getAvailableQuantity() <= 0) {
-            throw new IllegalStateException(
+            throw new EquipmentUnavailableException(
                     "Equipment '" + equipment.getName()
                     + "' is out of stock.");
         }
@@ -109,7 +115,7 @@ public class BorrowService {
                             conn, equipmentId);
 
             if (!decremented) {
-                throw new IllegalStateException(
+                throw new EquipmentUnavailableException(
                         "Equipment is out of stock.");
             }
 
@@ -139,7 +145,8 @@ public class BorrowService {
      */
     public BorrowRecord returnEquipment(int recordId,
                                         int requestingUserId)
-            throws SQLException {
+            throws SQLException, InvalidBorrowRequestException, EquipmentUnavailableException,
+                   UnauthorizedBorrowingException, DuplicateReturnException {
 
         return returnEquipment(
                 recordId, requestingUserId, LocalDate.now());
@@ -151,31 +158,32 @@ public class BorrowService {
     public BorrowRecord returnEquipment(int recordId,
                                         int requestingUserId,
                                         LocalDate returnDate)
-            throws SQLException {
+            throws SQLException, InvalidBorrowRequestException, EquipmentUnavailableException,
+                   UnauthorizedBorrowingException, DuplicateReturnException {
 
         User requestingUser = userDAO.findById(requestingUserId);
 
         if (requestingUser == null) {
-            throw new SecurityException(
+            throw new UnauthorizedBorrowingException(
                     "User does not exist.");
         }
 
         if (!"STUDENT".equalsIgnoreCase(requestingUser.getRole())
                 && !"ADMIN".equalsIgnoreCase(requestingUser.getRole())) {
-            throw new SecurityException(
+            throw new UnauthorizedBorrowingException(
                     "Unauthorized user.");
         }
 
         BorrowRecord record = borrowRecordDAO.findById(recordId);
 
         if (record == null) {
-            throw new IllegalArgumentException(
+            throw new InvalidBorrowRequestException(
                     "Borrow record with ID " + recordId + " does not exist.");
         }
 
         if ("STUDENT".equalsIgnoreCase(requestingUser.getRole())
                 && record.getUserId() != requestingUserId) {
-            throw new SecurityException(
+            throw new UnauthorizedBorrowingException(
                     "Students can return only their own equipment.");
         }
 
@@ -187,7 +195,8 @@ public class BorrowService {
      */
     private BorrowRecord returnEquipmentInternal(
             BorrowRecord record, LocalDate returnDate)
-            throws SQLException {
+            throws SQLException, InvalidBorrowRequestException, EquipmentUnavailableException,
+                   UnauthorizedBorrowingException, DuplicateReturnException {
 
         int recordId = record.getRecordId();
 
@@ -196,12 +205,12 @@ public class BorrowService {
         }
 
         if ("RETURNED".equalsIgnoreCase(record.getStatus())) {
-            throw new IllegalStateException(
+            throw new DuplicateReturnException(
                     "Record has already been returned.");
         }
 
         if (returnDate.isBefore(record.getBorrowDate())) {
-            throw new IllegalArgumentException(
+            throw new InvalidBorrowRequestException(
                     "Return date cannot be before borrow date.");
         }
 

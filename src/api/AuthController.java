@@ -8,6 +8,8 @@ import com.sun.net.httpserver.HttpHandler;
 
 import model.User;
 import service.UserService;
+import exception.DuplicateEmailException;
+import exception.InvalidUserDetailsException;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -62,6 +64,11 @@ public class AuthController implements HttpHandler {
                     Map.of("status", "error", "message", e.getMessage()));
 
         } catch (IllegalArgumentException e) {
+
+            sendJson(exchange, 400,
+                    Map.of("status", "error", "message", e.getMessage()));
+
+        } catch (InvalidUserDetailsException | DuplicateEmailException e) {
 
             sendJson(exchange, 400,
                     Map.of("status", "error", "message", e.getMessage()));

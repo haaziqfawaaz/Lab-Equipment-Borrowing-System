@@ -1,14 +1,16 @@
-
-import database.DatabaseConnection;
 import model.BorrowRecord;
 import model.Equipment;
 import model.User;
+
 import service.BorrowService;
 import service.EquipmentService;
 import service.UserService;
 
+import exception.DuplicateEmailException;
+import exception.DuplicateReturnException;
+import exception.EquipmentUnavailableException;
+
 import java.math.BigDecimal;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -16,14 +18,14 @@ import java.util.Scanner;
 
 /**
  * Main application for Lab Equipment Borrowing and Return System.
- * Provides student registration, login, admin management,
- * equipment borrowing, returning and history.
  */
 public class Main {
 
     private static final UserService userService = new UserService();
-    private static final EquipmentService equipmentService = new EquipmentService();
-    private static final BorrowService borrowService = new BorrowService();
+    private static final EquipmentService equipmentService =
+            new EquipmentService();
+    private static final BorrowService borrowService =
+            new BorrowService();
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -49,28 +51,20 @@ public class Main {
                 switch (choice) {
 
                     case "1" -> registerStudent();
-
                     case "2" -> login();
-
                     case "3" -> viewEquipment();
-
                     case "4" -> borrowEquipment();
-
                     case "5" -> returnEquipment();
-
                     case "6" -> viewHistory();
-
                     case "7" -> addEquipment();
-
                     case "8" -> registerAdmin();
-
                     case "9" -> logout();
-
                     case "10" -> runAutomatedTestSuite();
 
                     case "0" -> {
                         logout();
-                        System.out.println("Thank you for using the system!");
+                        System.out.println(
+                                "Thank you for using the system!");
                         running = false;
                     }
 
@@ -157,7 +151,8 @@ public class Main {
         }
 
         if (!userService.isAdminLoggedIn()) {
-            System.out.println("Access denied. Admin privileges required.");
+            System.out.println(
+                    "Access denied. Admin privileges required.");
             return null;
         }
 
@@ -167,14 +162,15 @@ public class Main {
     /**
      * 1. Student Registration
      */
-    private static void registerStudent() throws SQLException {
+    private static void registerStudent() throws Exception {
 
         System.out.println("\n--- Student Registration ---");
 
         String name = readInput("Enter Student Name: ");
         String email = readInput("Enter Student Email: ");
         String contact = readInput("Enter Contact Number: ");
-        String password = readInput("Create Password (minimum 8 characters): ");
+        String password = readInput(
+                "Create Password (minimum 8 characters): ");
 
         if (name == null || email == null ||
                 contact == null || password == null) {
@@ -196,7 +192,8 @@ public class Main {
     private static void login() throws SQLException {
 
         if (userService.isLoggedIn()) {
-            System.out.println("Please logout before logging in again.");
+            System.out.println(
+                    "Please logout before logging in again.");
             return;
         }
 
@@ -236,12 +233,14 @@ public class Main {
             return;
         }
 
-        System.out.printf("%-5s %-30s %-15s %-10s %-10s%n",
+        System.out.printf(
+                "%-5s %-30s %-15s %-10s %-10s%n",
                 "ID", "Name", "Category", "Total", "Available");
 
         for (Equipment equipment : equipmentList) {
 
-            System.out.printf("%-5d %-30s %-15s %-10d %-10d%n",
+            System.out.printf(
+                    "%-5d %-30s %-15s %-10d %-10d%n",
                     equipment.getEquipmentId(),
                     equipment.getName(),
                     equipment.getCategory(),
@@ -253,7 +252,7 @@ public class Main {
     /**
      * 4. Borrow Equipment
      */
-    private static void borrowEquipment() throws SQLException {
+    private static void borrowEquipment() throws Exception {
 
         User user = requireLogin();
 
@@ -262,7 +261,8 @@ public class Main {
         }
 
         if (!"STUDENT".equalsIgnoreCase(user.getRole())) {
-            System.out.println("Only students can borrow equipment.");
+            System.out.println(
+                    "Only students can borrow equipment.");
             return;
         }
 
@@ -290,7 +290,7 @@ public class Main {
     /**
      * 5. Return Equipment
      */
-    private static void returnEquipment() throws SQLException {
+    private static void returnEquipment() throws Exception {
 
         User user = requireLogin();
 
@@ -350,7 +350,8 @@ public class Main {
             System.out.println("----------------------------------");
             System.out.println("Record ID: " + record.getRecordId());
             System.out.println("Student ID: " + record.getUserId());
-            System.out.println("Equipment ID: " + record.getEquipmentId());
+            System.out.println("Equipment ID: "
+                    + record.getEquipmentId());
             System.out.println("Borrow Date: " + record.getBorrowDate());
             System.out.println("Due Date: " + record.getDueDate());
             System.out.println("Return Date: " + record.getReturnDate());
@@ -392,13 +393,14 @@ public class Main {
                 condition);
 
         System.out.println("Equipment added successfully!");
-        System.out.println("Equipment ID: " + equipment.getEquipmentId());
+        System.out.println("Equipment ID: "
+                + equipment.getEquipmentId());
     }
 
     /**
      * 8. Register another administrator.
      */
-    private static void registerAdmin() throws SQLException {
+    private static void registerAdmin() throws Exception {
 
         User admin = requireAdmin();
 
@@ -411,7 +413,8 @@ public class Main {
         String name = readInput("Enter Admin Name: ");
         String email = readInput("Enter Admin Email: ");
         String contact = readInput("Enter Contact Number: ");
-        String password = readInput("Create Password (minimum 8 characters): ");
+        String password = readInput(
+                "Create Password (minimum 8 characters): ");
 
         if (name == null || email == null ||
                 contact == null || password == null) {
@@ -421,7 +424,8 @@ public class Main {
         User newAdmin = userService.registerAdmin(
                 name, email, contact, password);
 
-        System.out.println("New administrator registered successfully!");
+        System.out.println(
+                "New administrator registered successfully!");
         System.out.println("Admin ID: " + newAdmin.getUserId());
         System.out.println("Admin Name: " + newAdmin.getName());
     }
@@ -456,9 +460,11 @@ public class Main {
         long timestamp = System.currentTimeMillis();
 
         try {
-            String testEmail = "test_" + timestamp + "@test.edu";
 
-            // Test 1: Student Registration
+            String testEmail =
+                    "test_" + timestamp + "@test.edu";
+
+            // TEST 1: Student Registration
             System.out.println("\nTEST 1: Student Registration");
 
             User student = userService.registerStudent(
@@ -472,121 +478,148 @@ public class Main {
                 passed++;
             }
 
-            // Test 2: Duplicate Email
-            System.out.println("\nTEST 2: Duplicate Email Validation");
+            // TEST 2: Duplicate Email Validation
+            System.out.println(
+                    "\nTEST 2: Duplicate Email Validation");
 
             try {
+
                 userService.registerStudent(
                         "Duplicate Student",
                         testEmail,
                         "9999999998",
                         "TestPass123!");
 
-                System.out.println("FAIL: Duplicate email accepted.");
+                System.out.println(
+                        "FAIL: Duplicate email accepted.");
 
-            } catch (IllegalArgumentException e) {
-                System.out.println("PASS: Duplicate email rejected.");
+            } catch (DuplicateEmailException e) {
+
+                System.out.println(
+                        "PASS: Duplicate email rejected.");
                 passed++;
             }
 
-            // Test 3: Password Authentication
-            System.out.println("\nTEST 3: Password Authentication");
+            // TEST 3: Password Authentication
+            System.out.println(
+                    "\nTEST 3: Password Authentication");
 
             User testLogin = userService.login(
                     testEmail, "TestPass123!");
 
             if (testLogin != null) {
-                System.out.println("PASS: Correct password accepted.");
+                System.out.println(
+                        "PASS: Correct password accepted.");
                 passed++;
             }
 
             userService.logout();
 
-            // Test 4: Incorrect Password
-            System.out.println("\nTEST 4: Incorrect Password");
+            // TEST 4: Incorrect Password
+            System.out.println(
+                    "\nTEST 4: Incorrect Password");
 
             User wrongLogin = userService.login(
                     testEmail, "WrongPassword123!");
 
             if (wrongLogin == null) {
-                System.out.println("PASS: Incorrect password rejected.");
+                System.out.println(
+                        "PASS: Incorrect password rejected.");
                 passed++;
             }
 
-            // Test 5: Admin Authorization
-            System.out.println("\nTEST 5: Admin Authorization");
+            // TEST 5: Admin Authorization
+            System.out.println(
+                    "\nTEST 5: Admin Authorization");
 
             int adminId = 1;
 
             if (userService.isAdmin(adminId)) {
-                System.out.println("PASS: Admin account verified.");
+                System.out.println(
+                        "PASS: Admin account verified.");
                 passed++;
             }
 
-            // Test 6: Equipment Creation
-            System.out.println("\nTEST 6: Equipment Creation");
+            // TEST 6: Equipment Creation
+            System.out.println(
+                    "\nTEST 6: Equipment Creation");
 
-            String equipmentName = "Test Equipment " + timestamp;
+            String equipmentName =
+                    "Test Equipment " + timestamp;
 
-            Equipment equipment = equipmentService.addEquipment(
-                    adminId,
-                    equipmentName,
-                    "Testing",
-                    1,
-                    "GOOD");
+            Equipment equipment =
+                    equipmentService.addEquipment(
+                            adminId,
+                            equipmentName,
+                            "Testing",
+                            1,
+                            "GOOD");
 
             if (equipment.getEquipmentId() > 0) {
-                System.out.println("PASS: Equipment added.");
+                System.out.println(
+                        "PASS: Equipment added.");
                 passed++;
             }
 
-            // Test 7: Equipment Availability
-            System.out.println("\nTEST 7: Equipment Availability");
+            // TEST 7: Equipment Availability
+            System.out.println(
+                    "\nTEST 7: Equipment Availability");
 
             if (equipmentService.isEquipmentAvailable(
                     equipment.getEquipmentId())
                     && equipmentService.getAvailableQuantity(
                     equipment.getEquipmentId()) == 1) {
 
-                System.out.println("PASS: Equipment availability verified.");
+                System.out.println(
+                        "PASS: Equipment availability verified.");
                 passed++;
             }
 
-            // Test 8: Borrowing and Out-of-Stock Prevention
-            System.out.println("\nTEST 8: Borrowing and Stock Validation");
+            // TEST 8: Borrowing and Stock Validation
+            System.out.println(
+                    "\nTEST 8: Borrowing and Stock Validation");
 
             LocalDate borrowDate = LocalDate.now();
 
-            BorrowRecord record = borrowService.borrowEquipment(
-                    student.getUserId(),
-                    equipment.getEquipmentId(),
-                    borrowDate);
+            BorrowRecord record =
+                    borrowService.borrowEquipment(
+                            student.getUserId(),
+                            equipment.getEquipmentId(),
+                            borrowDate);
 
-            if (record.getDueDate().equals(borrowDate.plusDays(7))
+            if (record.getDueDate().equals(
+                    borrowDate.plusDays(7))
                     && equipmentService.getAvailableQuantity(
                     equipment.getEquipmentId()) == 0) {
 
-                System.out.println("PASS: Seven-day due date and stock update verified.");
+                System.out.println(
+                        "PASS: Seven-day due date and stock update verified.");
                 passed++;
             }
 
             try {
+
                 borrowService.borrowEquipment(
                         student.getUserId(),
                         equipment.getEquipmentId());
 
-                System.out.println("FAIL: Out-of-stock borrowing accepted.");
+                System.out.println(
+                        "FAIL: Out-of-stock borrowing accepted.");
 
-            } catch (IllegalStateException e) {
-                System.out.println("Out-of-stock borrowing correctly blocked.");
+            } catch (EquipmentUnavailableException e) {
+
+                System.out.println(
+                        "PASS: Out-of-stock borrowing blocked.");
             }
 
-            // Test 9: Return and Fine Calculation
-            System.out.println("\nTEST 9: Return and Fine Calculation");
+            // TEST 9: Return and Fine Calculation
+            System.out.println(
+                    "\nTEST 9: Return and Fine Calculation");
 
-            BorrowRecord returned = borrowService.returnEquipment(
-                    record.getRecordId(),
-                    adminId);
+            BorrowRecord returned =
+                    borrowService.returnEquipment(
+                            record.getRecordId(),
+                            adminId);
 
             if ("RETURNED".equals(returned.getStatus())
                     && equipmentService.getAvailableQuantity(
@@ -594,38 +627,51 @@ public class Main {
                     && BigDecimal.ZERO.compareTo(
                     returned.getFineAmount()) == 0) {
 
-                System.out.println("PASS: Return, stock restoration and fine verified.");
+                System.out.println(
+                        "PASS: Return, stock restoration and fine verified.");
                 passed++;
             }
 
-            // Test 10: Duplicate Return Prevention
-            System.out.println("\nTEST 10: Duplicate Return Prevention");
+            // TEST 10: Duplicate Return Prevention
+            System.out.println(
+                    "\nTEST 10: Duplicate Return Prevention");
 
             try {
+
                 borrowService.returnEquipment(
                         record.getRecordId(),
                         adminId);
 
-                System.out.println("FAIL: Duplicate return accepted.");
+                System.out.println(
+                        "FAIL: Duplicate return accepted.");
 
-            } catch (IllegalStateException e) {
-                System.out.println("PASS: Duplicate return blocked.");
+            } catch (DuplicateReturnException e) {
+
+                System.out.println(
+                        "PASS: Duplicate return blocked.");
                 passed++;
             }
 
         } catch (Exception e) {
 
-            System.out.println("TEST SUITE ERROR: " + e.getMessage());
+            System.out.println(
+                    "TEST SUITE ERROR: " + e.getMessage());
+
             e.printStackTrace();
 
         } finally {
 
             userService.logout();
 
-            System.out.println("\n==========================================");
-            System.out.println(" TEST SUMMARY: " + passed + "/" + total
-                    + " TESTS PASSED");
-            System.out.println("==========================================");
+            System.out.println(
+                    "\n==========================================");
+
+            System.out.println(
+                    " TEST SUMMARY: " + passed + "/" + total
+                            + " TESTS PASSED");
+
+            System.out.println(
+                    "==========================================");
         }
     }
 }

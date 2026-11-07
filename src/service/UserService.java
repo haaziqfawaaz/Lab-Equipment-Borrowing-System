@@ -2,6 +2,8 @@
 package service;
 
 import dao.UserDAO;
+import exception.DuplicateEmailException;
+import exception.InvalidUserDetailsException;
 import model.User;
 import security.PasswordUtil;
 
@@ -34,24 +36,25 @@ public class UserService {
      * Validates common registration details.
      */
     private void validateUserDetails(String name, String email,
-                                     String password) {
+                                     String password)
+            throws InvalidUserDetailsException {
 
         if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Name cannot be empty.");
+            throw new InvalidUserDetailsException("Name cannot be empty.");
         }
 
         if (email == null || email.trim().isEmpty()) {
-            throw new IllegalArgumentException("Email cannot be empty.");
+            throw new InvalidUserDetailsException("Email cannot be empty.");
         }
 
         String cleanEmail = email.trim();
 
         if (!cleanEmail.contains("@") || !cleanEmail.contains(".")) {
-            throw new IllegalArgumentException("Invalid email format.");
+            throw new InvalidUserDetailsException("Invalid email format.");
         }
 
         if (password == null || password.length() < 8) {
-            throw new IllegalArgumentException(
+            throw new InvalidUserDetailsException(
                     "Password must contain at least 8 characters.");
         }
     }
@@ -61,14 +64,14 @@ public class UserService {
      */
     public User registerStudent(String name, String email,
                                 String contact, String password)
-            throws SQLException {
+            throws SQLException, InvalidUserDetailsException, DuplicateEmailException {
 
         validateUserDetails(name, email, password);
 
         String cleanEmail = email.trim();
 
         if (userDAO.findByEmail(cleanEmail) != null) {
-            throw new IllegalArgumentException(
+            throw new DuplicateEmailException(
                     "This email is already registered.");
         }
 
@@ -174,7 +177,7 @@ public class UserService {
      */
     public User registerAdmin(String name, String email,
                               String contact, String password)
-            throws SQLException {
+            throws SQLException, InvalidUserDetailsException, DuplicateEmailException {
 
         if (currentUser == null) {
             throw new SecurityException(
@@ -198,7 +201,7 @@ public class UserService {
         String cleanEmail = email.trim();
 
         if (userDAO.findByEmail(cleanEmail) != null) {
-            throw new IllegalArgumentException(
+            throw new DuplicateEmailException(
                     "This email is already registered.");
         }
 

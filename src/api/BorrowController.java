@@ -12,7 +12,12 @@ import com.sun.net.httpserver.HttpHandler;
 
 import model.BorrowRecord;
 import model.User;
+import service.BorrowOperations;
 import service.BorrowService;
+import exception.DuplicateReturnException;
+import exception.EquipmentUnavailableException;
+import exception.InvalidBorrowRequestException;
+import exception.UnauthorizedBorrowingException;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -34,7 +39,7 @@ public class BorrowController implements HttpHandler {
             )
             .create();
 
-    private final BorrowService borrowService = new BorrowService();
+    private final BorrowOperations borrowService = new BorrowService();
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -82,13 +87,14 @@ public class BorrowController implements HttpHandler {
                                "message", "Method not allowed"));
             }
 
-        } catch (SecurityException e) {
+        } catch (UnauthorizedBorrowingException | SecurityException e) {
 
             sendJson(exchange, 403,
                     Map.of("status", "error",
                            "message", e.getMessage()));
 
-        } catch (IllegalArgumentException | IllegalStateException e) {
+        } catch (InvalidBorrowRequestException | EquipmentUnavailableException
+                | DuplicateReturnException | IllegalArgumentException | IllegalStateException e) {
 
             sendJson(exchange, 400,
                     Map.of("status", "error",
